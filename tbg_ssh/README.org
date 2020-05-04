@@ -1,0 +1,25 @@
+* Introduction
+** Why this tool exists
+When I use ssh command to login remote server in terminal, it always can't store user and password for me. And I have to input password every time.
+So that, I want to a tool to help me store my passwords.
+
+** Why use perl
+I don't know, maybe I don't hate perl language and I want to learn more a language. At least, I think it is better then python.
+
+* Installation
+#+BEGIN_SRC shell
+  git clone git@github.com:3badguys/tbg_tools.git
+  cd tbg_tools/tbg_ssh
+  make install
+#+END_SRC
+
+* Usage
+#+BEGIN_SRC shell
+  # First time to login remote server, shoule pass you password
+  ./tbg_ssh -h 192.168.56.67 -u root -p 456567
+
+  # After first time, you can not pass you password again
+  ./tbg_ssh -h 192.168.56.67 -u root
+
+  # When not pass --user|-u param, use root by default
+#+END_SRC
