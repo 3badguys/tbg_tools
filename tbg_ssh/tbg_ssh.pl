@@ -40,7 +40,7 @@ sub ssh_login {
          $is_update = 0;
     }
 
-    my @cmd_args = ("sshpass", "-p", "$password", "ssh", "$user\@$host");
+    my @cmd_args = ("sshpass", "-p", "$password", "ssh", "-o", "StrictHostKeyChecking=no", "$user\@$host");
     if (system(@cmd_args) == 0) {
         write_json_conf($host, $user, $password) if $is_update;
     } else {
