@@ -5,7 +5,7 @@ tbg_ssh_exec := /usr/bin/tbg_ssh
 install:
 	ln -sf $(shell pwd)/tbg_ssh.pl $(tbg_ssh_exec)
 	mkdir -p $(tbg_ssh_cfg_prefix)
-	cp ./tbg_ssh.json $(tbg_ssh_cfg_prefix)/tbg_ssh.json
+	cp -n ./tbg_ssh.json $(tbg_ssh_cfg_prefix)/tbg_ssh.json
 
 .PHONY: uninstall
 uninstall:
