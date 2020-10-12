@@ -18,8 +18,11 @@ I don't know, maybe I don't hate perl language and I want to learn more a langua
   # First time to login remote server, shoule pass you password
   ./tbg_ssh -h 192.168.56.67 -u root -p 456567
 
+  # First time to login remote server, and force save password
+  ./tbg_ssh -h 192.168.56.67 -u root -p 456567 -f
+
   # After first time, you can not pass you password again
   ./tbg_ssh -h 192.168.56.67 -u root
 
-  # When not pass --user|-u param, use root by default
+  # When no --user|-u param passed, use root by default
 #+END_SRC

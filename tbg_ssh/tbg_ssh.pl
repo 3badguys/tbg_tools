@@ -12,10 +12,12 @@ use Getopt::Long;
 my $host;
 my $user;
 my $password;
+my $force_save;
 GetOptions(
            'host=s'     => \$host,
            'user=s'     => \($user = 'root'),
            'password=s' => \$password,
+           'force-save' => \$force_save,
           ) or die("Invalid options passed to $0\n");
 
 my $tbg_ssh_json_file = "$HOME/.tbg/tbg_ssh/tbg_ssh.json";
@@ -27,7 +29,7 @@ my $tbg_ssh_data = do {
 my $tbg_ssh_json = decode_json($tbg_ssh_data) // {};
 
 sub ssh_login {
-    my ($host, $user, $password) = @_;
+    my ($host, $user, $password, $force_save) = @_;
 
     if (!defined($host) || !defined($user)) {
         die("ssh login failed, param is invaild.");
@@ -43,9 +45,10 @@ sub ssh_login {
     my @cmd_args = ("sshpass", "-p", "$password", "ssh", "-o", "StrictHostKeyChecking=no", "$user\@$host");
     if (system(@cmd_args) == 0) {
         write_json_conf($host, $user, $password) if($is_update);
-    } else {
-        die("system @cmd_args failed: $?");
+        return;
     }
+    write_json_conf($host, $user, $password) if($is_update && $force_save);
+    die("system @cmd_args failed: $?");
 }
 
 sub write_json_conf {
@@ -66,4 +69,4 @@ sub write_json_conf {
     close($json_fh);
 }
 
-ssh_login($host, $user, $password);
+ssh_login($host, $user, $password, $force_save);
