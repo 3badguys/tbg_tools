@@ -6,6 +6,7 @@ use Data::Dumper;
 use utf8;
 use Env qw( HOME );
 use JSON qw( decode_json encode_json );
+use JSON::MaybeXS;
 use Data::Diver qw( Dive );
 use Getopt::Long;
 
@@ -65,7 +66,7 @@ sub write_json_conf {
     }
 
     open(my $json_fh, ">", $tbg_ssh_json_file) or die($!);
-    print $json_fh encode_json($tbg_ssh_json);
+    print $json_fh JSON::MaybeXS->new(utf8 => 1, pretty => 1)->encode($tbg_ssh_json);
     close($json_fh);
 }
 
