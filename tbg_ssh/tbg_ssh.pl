@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use Data::Dumper;
+use Data::Dumper; $Data::Dumper::Indent = 1;
 use utf8;
 use Env qw( HOME );
 use JSON qw( decode_json encode_json );
@@ -44,6 +44,7 @@ sub ssh_login {
     }
 
     my @cmd_args = ("sshpass", "-p", "$password", "ssh", "-o", "StrictHostKeyChecking=no", "$user\@$host");
+    print "SSH-CMD: " . Dumper(\@cmd_args);
     if (system(@cmd_args) == 0) {
         write_json_conf($host, $user, $password) if($is_update);
         return;
