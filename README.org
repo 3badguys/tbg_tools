@@ -2,4 +2,4 @@
 Some tools making work convenient.
 
 * Tools List
-[[file:tbg_ssh/README.org][tbg_ssh]]
+[[file:tbg_ssh/][tbg_ssh]]
